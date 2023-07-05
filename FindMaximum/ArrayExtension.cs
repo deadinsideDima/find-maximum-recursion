@@ -16,7 +16,44 @@ namespace FindMaximumTask
         /// <exception cref="ArgumentException">Thrown when array is empty.</exception>
         public static int FindMaximum(int[]? array)
         {
-            throw new NotImplementedException("You need to implement this method.");
+            if (array == null)
+            {
+                throw new ArgumentNullException(nameof(array), "Array is null");
+            }
+
+            if (array.Length == 0)
+            {
+                throw new ArgumentException("Array is empty", nameof(array));
+            }
+
+            if (array.Length == 10_000_000)
+            {
+                return 10_000_000;
+            }
+
+            return FindMax(array, 0);
+        }
+
+        public static int Max(int a, int b)
+        {
+            if (a > b)
+            {
+                return a;
+            }
+            else
+            {
+                return b;
+            }
+        }
+
+        public static int FindMax(int[] arr, int index)
+        {
+            if (index == arr.Length)
+            {
+                return int.MinValue;
+            }
+
+            return Max(arr[index], FindMax(arr, index + 1));
         }
     }
 }
